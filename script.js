@@ -1,4 +1,4 @@
-// Función para esperar a que las voces estén disponibles
+
 function loadVoices() {
     return new Promise((resolve) => {
         const synth = window.speechSynthesis;
@@ -15,7 +15,7 @@ function loadVoices() {
     });
 }
 
-// Función para reproducir texto, manejando cancelaciones previas
+
 async function speak(text) {
     const synth = window.speechSynthesis;
     const voices = await loadVoices();
@@ -25,19 +25,19 @@ async function speak(text) {
         return;
     }
 
-    // Cancelar cualquier discurso previo
+    
     synth.cancel();
 
-    // Configurar el mensaje
+    
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'es-ES';
     utterance.voice = voices.find((voice) => voice.lang === 'es-ES') || voices[0];
 
-    // Esperar un momento antes de hablar para garantizar fluidez
+    
     setTimeout(() => synth.speak(utterance), 100);
 }
 
-// Manejar clic en botones
+
 document.getElementById('no-button').addEventListener('click', () => {
     speak('No');
 });
